@@ -13,6 +13,8 @@ int main(int argc, char *argv[])
     }
     qss.close();
     MainWindow w;
+//    w.setWindowFlags(w.windowFlags() &~ Qt::WindowMaximizeButtonHint);
+//    w.setFixedSize(400, 300);
     w.show();
     return a.exec();
 }

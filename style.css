@@ -1,21 +1,39 @@
-.lineEdit{
-  border:2px solid #d9d9d9;
-  border-radius:6px;
-  padding:0 6px;
-}
-.lineEdit:focus{
-    border-color:#bf85ff;
+.lineEdit {
+    border: 2px solid #bf85ff;
+    border-radius: 6px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    padding: 0 6px;
+    border-right: none;
 }
 
-.btn{
+.lineEdit:focus {
+    border-color: #bf85ff;
+}
+
+.btn {
     background: #b98af6;
     border-radius: 6px;
     color: #fff;
-
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
 }
-.btn:hover{
+
+.btn:hover {
     background: #bf85ff;
 }
+
 .btn:pressed {
     background: #a877e8;
+}
+.processBar{
+    border: none;
+    padding: 0;
+    text-align: center;
+    color: #666;
+    border-radius: 15px;
+}
+.processBar::chunk {
+    background: #b98af6;
+    border-radius: 15px;
 }
