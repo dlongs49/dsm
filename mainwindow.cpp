@@ -12,13 +12,13 @@ MainWindow::MainWindow(QWidget *parent)
     const int h = 300;
     this->resize(w, h);
     lineEdit = new QLineEdit;
-    lineEdit->setPlaceholderText("请输入要删除的路径");
+    lineEdit->setPlaceholderText("输入要删除的文件夹");
     lineEdit->setFixedWidth(200);
     lineEdit->setMinimumHeight(40);
     lineEdit->setProperty("class", "lineEdit");
     connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(inpChange()));
     btn = new QPushButton;
-    btn->setText("确定");
+    btn->setText("删 除");
     btn->setProperty("class","btn");
     btn->setFixedWidth(90);
     btn->setMinimumHeight (40);
