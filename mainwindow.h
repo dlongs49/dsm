@@ -11,6 +11,7 @@
 #include <QWidget>
 #include <QProgressBar>
 #include <QTimer>
+#include <QFileInfo>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -41,6 +42,5 @@ private:
     QMessageBox *msg;
     QTimer *timer;
     QProgressBar *progressBar;
-    Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

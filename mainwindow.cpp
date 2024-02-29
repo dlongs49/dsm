@@ -78,16 +78,21 @@ void MainWindow::customClick(){
         msg->information(this,"提示","文件路径不合法");
         return;
     }
+    QFileInfo fileInfo(str);
     this->progressBar->setVisible(true);
     this->timer->start();
-    QDir qDir(str);
-    qDir.removeRecursively();
+    if(fileInfo.isFile()){
+        qDebug()<< "File" << str;
+        QFile::remove(str);
+    }else if (fileInfo.isDir()){
+        QDir qDir(str);
+        qDir.removeRecursively();
+    }
 };
 void MainWindow::onTimeOut(){
     static int time = 0;
     time++;
     this->progressBar->setValue(time);
-    qDebug()<< "进度:"<<time;
     if(time >= 100){
         timer->stop();
         time = 0;
