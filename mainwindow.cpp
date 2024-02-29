@@ -11,12 +11,14 @@ MainWindow::MainWindow(QWidget *parent)
     const int w = 400;
     const int h = 300;
     this->resize(w, h);
+
     lineEdit = new QLineEdit;
     lineEdit->setPlaceholderText("输入要删除的文件夹");
     lineEdit->setFixedWidth(200);
     lineEdit->setMinimumHeight(40);
     lineEdit->setProperty("class", "lineEdit");
     connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(inpChange()));
+
     btn = new QPushButton;
     btn->setText("删 除");
     btn->setProperty("class","btn");
@@ -25,46 +27,45 @@ MainWindow::MainWindow(QWidget *parent)
     btn->setCursor(Qt::PointingHandCursor);
     connect(btn, SIGNAL(clicked()), this, SLOT(customClick()));
 
-    this->setContentsMargins(0,0,0,0);
-    widget = new QWidget(this);
-    widget->setMinimumWidth(w);
-    widget->setMinimumHeight(60);
+    inp_widget = new QWidget(this);
+    inp_widget->setMinimumWidth(w);
+    inp_widget->setMinimumHeight(60);
     layout = new QHBoxLayout();
     layout->setSpacing(0);
     layout->setMargin(0);
     layout->addWidget(lineEdit);
     layout->addWidget(btn);
     layout->setAlignment(Qt::AlignHCenter);
-    widget->setLayout(layout);
+    inp_widget->setLayout(layout);
 
     vlayout = new QVBoxLayout(this);
-    widget1 = new QWidget(this);
-    widget1->setFixedWidth(w);
-    widget1->setFixedHeight(80);
+    bar_widget = new QWidget(this);
+    bar_widget->setFixedWidth(w);
+    bar_widget->setFixedHeight(80);
     progressBar = new QProgressBar;
     progressBar->setRange(0,100);
-    timer = new QTimer();
-    timer->setInterval(10);
-    connect(timer,SIGNAL(timeout()),this,SLOT(onTimeOut()));
-    timer->start();
     progressBar->setFixedSize(280,30);
     progressBar->setVisible(true);
     progressBar->setProperty("class","processBar");
+    progressBar->setVisible(false);
     layouts = new QHBoxLayout();
     layouts->addWidget(progressBar);
-    widget1->setLayout(layouts);
+    bar_widget->setLayout(layouts);
+    timer = new QTimer();
+    timer->setInterval(10);
+    connect(timer,SIGNAL(timeout()),this,SLOT(onTimeOut()));
 
-    vlayout->addWidget(widget);
-    vlayout->addWidget(widget1);
-    widget2 = new QWidget(this);
-    widget2->setFixedWidth(w);
-    widget2->setFixedHeight(300);
+    vlayout->addWidget(inp_widget);
+    vlayout->addWidget(bar_widget);
+    main_widget = new QWidget(this);
+    main_widget->setFixedWidth(w);
+    main_widget->setFixedHeight(300);
 
     vlayout->setSpacing(0);
     vlayout->setMargin(0);
     vlayout->setAlignment(Qt::AlignTop);
-    widget2->setLayout(vlayout);
-    this->setCentralWidget(widget2);
+    main_widget->setLayout(vlayout);
+    this->setCentralWidget(main_widget);
 }
 QString str = "";
 void MainWindow::inpChange(){
@@ -77,7 +78,8 @@ void MainWindow::customClick(){
         msg->information(this,"提示","文件路径不合法");
         return;
     }
-    qDebug() << str;
+    this->progressBar->setVisible(true);
+    this->timer->start();
     QDir qDir(str);
     qDir.removeRecursively();
 };
@@ -88,7 +90,10 @@ void MainWindow::onTimeOut(){
     qDebug()<< "进度:"<<time;
     if(time >= 100){
         timer->stop();
-//        this->progressBar->setVisible(false);
+        time = 0;
+        this->lineEdit->setText("");
+        str = "";
+        this->progressBar->setVisible(false);
     }
 }
 MainWindow::~MainWindow() {

@@ -34,9 +34,9 @@ private:
     QHBoxLayout *layout;
     QHBoxLayout *layouts;
     QVBoxLayout *vlayout;
-    QWidget *widget;
-    QWidget *widget1;
-    QWidget *widget2;
+    QWidget *inp_widget;
+    QWidget *bar_widget;
+    QWidget *main_widget;
     QPushButton *btn;
     QMessageBox *msg;
     QTimer *timer;
