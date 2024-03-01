@@ -78,17 +78,20 @@ void MainWindow::inpChange() {
 void MainWindow::customClick() {
 
     QDir qdir;
+    QFileInfo fileInfo(str);
+
     msg = new QMessageBox;
-    if (!qdir.exists(str)) {
-        this->toast->showToast("文件路径或文件不存在");
-        this->timer->start();
+    if(str == ""){
+        this->toast->showToast("请输入文件路径或目录路径");
         return;
     }
-    QFileInfo fileInfo(str);
+    if (!qdir.exists(str)) {
+        this->toast->showToast("文件路径或文件不存在");
+        return;
+    }
     this->progressBar->setVisible(true);
     this->timer->start();
     if (fileInfo.isFile()) {
-        qDebug() << "File" << str;
         QFile::remove(str);
     } else if (fileInfo.isDir()) {
         QDir qDir(str);

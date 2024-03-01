@@ -15,9 +15,14 @@ Toast::Toast(QWidget *parent) : QLabel(parent) {
     widget->setMinimumWidth(width);
     widget->setMinimumHeight(height);
     layout = new QHBoxLayout;
+    layout->setSpacing(0);
+    layout->setMargin(0);
     layout->setAlignment(Qt::AlignHCenter);
     label = new QLabel;
     label->setObjectName("msg_label");
+    label->setFixedWidth(width);
+    label->setAlignment(Qt::AlignHCenter);
+    label->setAlignment(Qt::AlignCenter);
     label->setWordWrap(true);
     layout->addWidget(label);
     widget->setLayout(layout);
