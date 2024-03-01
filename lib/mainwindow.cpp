@@ -80,7 +80,6 @@ void MainWindow::customClick() {
     QDir qdir;
     QFileInfo fileInfo(str);
 
-    msg = new QMessageBox;
     if(str == ""){
         this->toast->showToast("请输入文件路径或目录路径");
         return;
