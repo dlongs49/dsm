@@ -40,17 +40,13 @@ private:
     QLineEdit *lineEdit;
     QHBoxLayout *layout;
     QHBoxLayout *layouts;
-    QHBoxLayout *layout_msg;
     QVBoxLayout *vlayout;
     QWidget *inp_widget;
     QWidget *bar_widget;
     QWidget *main_widget;
-    QWidget *msg_widget;
     QPushButton *btn;
-    QMessageBox *msg;
     QTimer *timer;
     QProgressBar *progressBar;
-    QLabel *msg_label;
     Toast *toast;
 };
 
