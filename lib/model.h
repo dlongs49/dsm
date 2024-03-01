@@ -1,14 +1,18 @@
 #ifndef MODEL_H
 #define MODEL_H
-
+#include <qpainter.h>
 #include <QWidget>
-
-class model : public QWidget
-{
-    Q_OBJECT
+#include <QGraphicsDropShadowEffect>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+class Model : public QWidget {
+Q_OBJECT
 public:
-    explicit model(QWidget *parent = nullptr);
+    Model(QWidget *parent = nullptr);
+    void paintEvent(QPaintEvent *event);
 
+private:
+    QGraphicsDropShadowEffect *shadow;
 signals:
 
 };

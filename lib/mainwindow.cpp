@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->resize(w, h);
     lineEdit = new QLineEdit;
     lineEdit->setPlaceholderText("输入要删除的文件夹");
+    lineEdit->setFont(QFont("PingFang SC", 10));
     lineEdit->setFixedWidth(200);
     lineEdit->setMinimumHeight(40);
     lineEdit->setProperty("class", "lineEdit");
@@ -60,7 +61,10 @@ MainWindow::MainWindow(QWidget *parent)
     main_widget->setFixedWidth(w);
     main_widget->setFixedHeight(300);
 
-    toast = new Toast(this);
+    toast = new Toast(this); // 轻提示
+    model = new Model(); // 弹框
+    model->setWindowModality(Qt::ApplicationModal);
+    model->show();
 
     vlayout->setSpacing(0);
     vlayout->setMargin(0);
@@ -80,7 +84,7 @@ void MainWindow::customClick() {
     QDir qdir;
     QFileInfo fileInfo(str);
 
-    if(str == ""){
+    if (str == "") {
         this->toast->showToast("请输入文件路径或目录路径");
         return;
     }

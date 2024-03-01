@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "toast.h"
+#include "model.h"
 #include <QMainWindow>
 #include <QWidget>
 #include <QHBoxLayout>
@@ -48,6 +49,7 @@ private:
     QTimer *timer;
     QProgressBar *progressBar;
     Toast *toast;
+    Model *model;
 };
 
 #endif // MAINWINDOW_H
