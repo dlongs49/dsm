@@ -4,6 +4,7 @@
 #include <QDir>
 
 using namespace std;
+
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent) {
     this->setWindowIcon(QIcon(":/logo.ico"));
@@ -11,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
     const int w = 400;
     const int h = 300;
     this->resize(w, h);
-
     lineEdit = new QLineEdit;
     lineEdit->setPlaceholderText("输入要删除的文件夹");
     lineEdit->setFixedWidth(200);
@@ -21,9 +21,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     btn = new QPushButton;
     btn->setText("删 除");
-    btn->setProperty("class","btn");
+    btn->setProperty("class", "btn");
     btn->setFixedWidth(90);
-    btn->setMinimumHeight (40);
+    btn->setMinimumHeight(40);
     btn->setCursor(Qt::PointingHandCursor);
     connect(btn, SIGNAL(clicked()), this, SLOT(customClick()));
 
@@ -43,17 +43,17 @@ MainWindow::MainWindow(QWidget *parent)
     bar_widget->setFixedWidth(w);
     bar_widget->setFixedHeight(80);
     progressBar = new QProgressBar;
-    progressBar->setRange(0,100);
-    progressBar->setFixedSize(280,30);
+    progressBar->setRange(0, 100);
+    progressBar->setFixedSize(280, 30);
     progressBar->setVisible(true);
-    progressBar->setProperty("class","processBar");
+    progressBar->setProperty("class", "processBar");
     progressBar->setVisible(false);
     layouts = new QHBoxLayout();
     layouts->addWidget(progressBar);
     bar_widget->setLayout(layouts);
     timer = new QTimer();
     timer->setInterval(10);
-    connect(timer,SIGNAL(timeout()),this,SLOT(onTimeOut()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(onTimeOut()));
 
     vlayout->addWidget(inp_widget);
     vlayout->addWidget(bar_widget);
@@ -66,34 +66,59 @@ MainWindow::MainWindow(QWidget *parent)
     vlayout->setAlignment(Qt::AlignTop);
     main_widget->setLayout(vlayout);
     this->setCentralWidget(main_widget);
+
+    msg_widget = new QWidget(this);
+    msg_widget->hide();
+    //msg_widget->setWindowFlags(Qt::FramelessWindowHint | Qt::Tool | Qt::WindowStaysOnTopHint);
+    timer->setInterval(1500);
+    connect(timer, SIGNAL(timeout()), this, SLOT(onMsgTimeOut()));
+    msg_widget->setProperty("class", "msg_widget");
+    layout_msg = new QHBoxLayout(this);
+    layout_msg->setAlignment(Qt::AlignHCenter);
+    msg_label = new QLabel;
+    msg_label->setProperty("class", "msg_label");
+    layout_msg->addWidget(msg_label);
+    msg_widget->setLayout(layout_msg);
 }
+
 QString str = "";
-void MainWindow::inpChange(){
+
+void MainWindow::inpChange() {
     str = this->lineEdit->text();
 };
-void MainWindow::customClick(){
+
+void MainWindow::customClick() {
+
     QDir qdir;
     msg = new QMessageBox;
-    if(!qdir.exists(str)){
-        msg->information(this,"提示","文件路径不合法");
+    if (!qdir.exists(str)) {
+        // msg->information(this, "提示", "文件路径不合法");
+        this->msg_widget->setGeometry(100, 100, 200, 40);
+        this->msg_label->setText("文件路径或文件不存在");
+        this->msg_widget->show();
+        this->timer->start();
         return;
     }
     QFileInfo fileInfo(str);
     this->progressBar->setVisible(true);
     this->timer->start();
-    if(fileInfo.isFile()){
-        qDebug()<< "File" << str;
+    if (fileInfo.isFile()) {
+        qDebug() << "File" << str;
         QFile::remove(str);
-    }else if (fileInfo.isDir()){
+    } else if (fileInfo.isDir()) {
         QDir qDir(str);
         qDir.removeRecursively();
     }
 };
-void MainWindow::onTimeOut(){
+void MainWindow::onMsgTimeOut() {
+    this->timer->stop();
+    this->msg_widget->hide();
+}
+void MainWindow::onTimeOut() {
     static int time = 0;
     time++;
     this->progressBar->setValue(time);
-    if(time >= 100){
+    if (time >= 100) {
         timer->stop();
         time = 0;
         this->lineEdit->setText("");
@@ -101,5 +126,6 @@ void MainWindow::onTimeOut(){
         this->progressBar->setVisible(false);
     }
 }
+
 MainWindow::~MainWindow() {
 }

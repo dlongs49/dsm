@@ -37,3 +37,13 @@
     background: #b98af6;
     border-radius: 15px;
 }
+
+
+.msg_widget{
+    background: rgba(0, 0, 0, 0.56);
+    border-radius: 4px;
+    opacity: 0.6;
+}
+.msg_label{
+    color: #fff;
+}
