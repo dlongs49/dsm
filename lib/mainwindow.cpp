@@ -7,7 +7,7 @@ using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
         : QMainWindow(parent) {
-    this->setWindowIcon(QIcon(":/logo.ico"));
+    this->setWindowIcon(QIcon(":/resource/logo.ico"));
     setWindowTitle("删小师");
     const int w = 400;
     const int h = 300;

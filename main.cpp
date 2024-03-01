@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "lib/mainwindow.h"
 
 #include <QApplication>
 #include <QFile>
@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     QFont f("微软雅黑",10);
     a.setFont(f);
-    QFile  qss(":/style.css");
+    QFile  qss(":/resource/style.css");
     if(qss.open(QFile::ReadOnly)){
         a.setStyleSheet(qss.readAll());
     }

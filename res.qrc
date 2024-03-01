@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>style.css</file>
-        <file>logo.ico</file>
+        <file>resource/style.css</file>
+        <file>resource/logo.ico</file>
     </qresource>
 </RCC>
