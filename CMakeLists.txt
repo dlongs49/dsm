@@ -17,6 +17,8 @@ set(PROJECT_SOURCES
         lib/mainwindow.h
         lib/toast.cpp
         lib/toast.h
+        lib/model.cpp
+        lib/model.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
