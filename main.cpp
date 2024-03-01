@@ -5,7 +5,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QFont f("微软雅黑",10);
+    QFont f("PingFang SC",10);
     a.setFont(f);
     QFile  qss(":/resource/style.css");
     if(qss.open(QFile::ReadOnly)){

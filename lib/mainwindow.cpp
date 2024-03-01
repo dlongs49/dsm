@@ -38,14 +38,13 @@ MainWindow::MainWindow(QWidget *parent)
     layout->setAlignment(Qt::AlignHCenter);
     inp_widget->setLayout(layout);
 
-    vlayout = new QVBoxLayout(this);
+    vlayout = new QVBoxLayout();
     bar_widget = new QWidget(this);
     bar_widget->setFixedWidth(w);
     bar_widget->setFixedHeight(80);
     progressBar = new QProgressBar;
     progressBar->setRange(0, 100);
     progressBar->setFixedSize(280, 30);
-    progressBar->setVisible(true);
     progressBar->setProperty("class", "processBar");
     progressBar->setVisible(false);
     layouts = new QHBoxLayout();
@@ -61,27 +60,13 @@ MainWindow::MainWindow(QWidget *parent)
     main_widget->setFixedWidth(w);
     main_widget->setFixedHeight(300);
 
-    message = new Message();
-    vlayout->addWidget(message);
+    toast = new Toast(this);
 
     vlayout->setSpacing(0);
     vlayout->setMargin(0);
     vlayout->setAlignment(Qt::AlignTop);
     main_widget->setLayout(vlayout);
     this->setCentralWidget(main_widget);
-
-//    msg_widget = new QWidget();
-//    msg_widget->hide();
-//    //msg_widget->setWindowFlags(Qt::FramelessWindowHint | Qt::Tool | Qt::WindowStaysOnTopHint);
-//    timer->setInterval(1500);
-//    connect(timer, SIGNAL(timeout()), this, SLOT(onMsgTimeOut()));
-//    msg_widget->setProperty("class", "msg_widget");
-//    layout_msg = new QHBoxLayout(this);
-//    layout_msg->setAlignment(Qt::AlignHCenter);
-//    msg_label = new QLabel;
-//    msg_label->setProperty("class", "msg_label");
-//    layout_msg->addWidget(msg_label);
-//    msg_widget->setLayout(layout_msg);
 }
 
 QString str = "";
@@ -95,10 +80,7 @@ void MainWindow::customClick() {
     QDir qdir;
     msg = new QMessageBox;
     if (!qdir.exists(str)) {
-        // msg->information(this, "提示", "文件路径不合法");
-//        this->msg_widget->setGeometry(100, 100, 200, 40);
-//        this->msg_label->setText("文件路径或文件不存在");
-//        this->msg_widget->show();
+        this->toast->showToast("文件路径或文件不存在");
         this->timer->start();
         return;
     }
@@ -114,10 +96,6 @@ void MainWindow::customClick() {
     }
 };
 
-void MainWindow::onMsgTimeOut() {
-    this->timer->stop();
-    this->msg_widget->hide();
-}
 
 void MainWindow::onTimeOut() {
     static int time = 0;

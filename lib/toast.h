@@ -12,17 +12,20 @@
 #include <QTimer>
 #include <QFileInfo>
 #include <QLabel>
-class Message : public QWidget {
+class Toast : public QLabel  {
 Q_OBJECT;
 
 public:
-    Message(QWidget *parent = nullptr);
-    ~Message();
+    Toast(QWidget  *parent = nullptr);
+    ~Toast();
+public slots:
+    void showToast(QString msg = " ");
+    void onMsgTimeOut();
 private:
-    QHBoxLayout *layout_msg;
-    QWidget *msg_widget;
+    QHBoxLayout *layout;
+    QWidget *widget;
     QTimer *timer;
-    QLabel *msg_label;
+    QLabel *label;
 };
 
 #endif // MESSAGE_H

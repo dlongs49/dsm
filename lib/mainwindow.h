@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "./message.h"
+#include "toast.h"
 #include <QMainWindow>
 #include <QWidget>
 #include <QHBoxLayout>
@@ -36,8 +36,6 @@ public slots:
 
     void onTimeOut();
 
-    void onMsgTimeOut();
-
 private:
     QLineEdit *lineEdit;
     QHBoxLayout *layout;
@@ -53,7 +51,7 @@ private:
     QTimer *timer;
     QProgressBar *progressBar;
     QLabel *msg_label;
-    Message *message;
+    Toast *toast;
 };
 
 #endif // MAINWINDOW_H
