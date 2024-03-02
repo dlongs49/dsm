@@ -51,3 +51,8 @@ QLabel#msg_label{
 QWidget#header_widget{
     border-bottom: 2px solid #eee;
 }
+QPushButton#close_btn{
+    margin-right: 20px;
+    background: none;
+    border: none;
+}
