@@ -14,6 +14,7 @@
 #include <QDebug>
 #include <QEvent>
 #include <QRect>
+#include <QFrame>
 class Model : public QWidget {
 Q_OBJECT
 public:
@@ -42,6 +43,7 @@ private:
     QPushButton *cancle_btn;
     QPixmap *pixmap;
     QPainter *painter;
+    QFrame *frame;
 signals:
     void emitOn();
 };
