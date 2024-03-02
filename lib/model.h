@@ -14,7 +14,8 @@
 #include <QDebug>
 #include <QEvent>
 #include <QRect>
-#include <QFrame>
+#include <QPoint>
+#include <QMouseEvent>
 class Model : public QWidget {
 Q_OBJECT
 public:
@@ -43,7 +44,13 @@ private:
     QPushButton *cancle_btn;
     QPixmap *pixmap;
     QPainter *painter;
-    QFrame *frame;
+
+    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+
+    QPoint start_point;
+    QPoint init_point;
 signals:
     void emitOn();
 };

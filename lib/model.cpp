@@ -7,7 +7,7 @@ Model::Model(QWidget *parent) : QWidget(parent) {
     int height = 150;
     this->resize(width, height);
 
-
+    // 头部标题+关闭
     header_layout = new QHBoxLayout();
     header_layout->setMargin(0);
     header_layout->setSpacing(0);
@@ -36,6 +36,7 @@ Model::Model(QWidget *parent) : QWidget(parent) {
     header_layout->addWidget(close_btn, Qt::AlignRight);
     header_widget->setLayout(header_layout);
 
+    // 提示文字区域
     con_layout = new QHBoxLayout();
     tip = new QLabel();
     tip->setFixedSize(50, 30);
@@ -57,6 +58,7 @@ Model::Model(QWidget *parent) : QWidget(parent) {
     con_widget->setFixedHeight(50);
     con_widget->setLayout(con_layout);
 
+    // 按钮区域
     opear_layout = new QHBoxLayout();
     opear_layout->setMargin(0);
     opear_layout->setSpacing(0);
@@ -122,10 +124,32 @@ bool Model::eventFilter(QObject *obj, QEvent *event) {
     return QWidget::eventFilter(obj, event);
 }
 
+// 向父窗口传递信息，使父窗口监听到 Model 确认事件
 void Model::handleOn() {
     emit emitOn();
 }
 
 void Model::handleClose() {
     this->hide();
+}
+// 窗口拖拽移动 鼠标按下事件
+void Model::mousePressEvent(QMouseEvent *event) {
+    // 判断按下是鼠标左键
+    if(event->button() == Qt::LeftButton){
+        // 相对 Model 坐标
+        start_point = event -> globalPos();
+        // 起始坐标 相对屏幕
+        init_point = this->frameGeometry().topLeft();
+    }
+}
+// 窗口拖拽移动 鼠标移动事件
+void Model::mouseMoveEvent(QMouseEvent *event) {
+    if(event->buttons() == Qt::LeftButton){
+        QPoint move_point = event -> globalPos() - start_point;
+        this->move(init_point + move_point);
+    }
+}
+// 窗口拖拽移动 鼠标松开事件
+void Model::mouseReleaseEvent(QMouseEvent *event) {
+    qDebug() << "松开" <<event;
 }
