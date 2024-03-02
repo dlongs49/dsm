@@ -65,7 +65,7 @@ MainWindow::MainWindow(QWidget *parent)
     model->setWindowModality(Qt::ApplicationModal);
     model->setAttribute(Qt::WA_DeleteOnClose);
     connect(model, SIGNAL(emitOn()), this, SLOT(handleOn()));
-
+    model->show();
     vlayout->setSpacing(0);
     vlayout->setMargin(0);
     vlayout->setAlignment(Qt::AlignTop);

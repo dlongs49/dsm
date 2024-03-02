@@ -13,6 +13,7 @@
 #include <QIcon>
 #include <QDebug>
 #include <QEvent>
+#include <QRect>
 class Model : public QWidget {
 Q_OBJECT
 public:
@@ -41,7 +42,6 @@ private:
     QPushButton *cancle_btn;
     QPixmap *pixmap;
     QPainter *painter;
-    QIcon *close_icon;
 signals:
     void emitOn();
 };

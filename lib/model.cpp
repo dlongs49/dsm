@@ -6,12 +6,12 @@ Model::Model(QWidget *parent) : QWidget(parent) {
     int width = 300;
     int height = 150;
     this->resize(width, height);
-    shadow = new QGraphicsDropShadowEffect(this);
-    shadow->setOffset(0, 0);
-    shadow->setColor(QColor("#ffffff"));
-    shadow->setBlurRadius(12);
-    this->setGraphicsEffect(shadow);
-    this->setContentsMargins(1, 1, 1, 1);
+//    shadow = new QGraphicsDropShadowEffect(this);
+//    shadow->setOffset(0, 0);
+//    shadow->setColor(QColor("#ffffff"));
+//    shadow->setBlurRadius(12);
+//    this->setGraphicsEffect(shadow);
+//    this->setContentsMargins(1, 1, 1, 1);
 
     header_layout = new QHBoxLayout();
     header_layout->setMargin(0);
@@ -99,17 +99,18 @@ Model::Model(QWidget *parent) : QWidget(parent) {
 }
 
 void Model::paintEvent(QPaintEvent *event) {
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.setBrush(QBrush("#ffffff"));
-    painter.setPen(Qt::transparent);
+    painter = new QPainter(this);
+    painter->setRenderHint(painter->Antialiasing);
+    painter->setBrush(QBrush("#ffffff"));
+    painter->setPen(Qt::transparent);
+
     QRect rect = this->rect();
     rect.setWidth(rect.width() - 1);
     rect.setHeight(rect.height() - 1);
-    painter.drawRoundedRect(rect, 10, 10);
-
+    painter->drawRoundedRect(rect, 10, 10);
     QWidget::paintEvent(event);
-    painter.fillRect(this->rect().adjusted(4, 4, -4, -4), "#ffffff");
+    painter->fillRect(this->rect().adjusted(4, 4, -4, -4), "#ffffff");
+    painter->end();
 }
 // 事件过滤器 监听鼠标移出移出  【鼠标移入关闭按钮切换图标】
 bool Model::eventFilter(QObject *obj, QEvent *event) {
