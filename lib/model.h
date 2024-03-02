@@ -3,7 +3,6 @@
 
 #include <qpainter.h>
 #include <QWidget>
-#include <QtSvg/QSvgRenderer>
 #include <QGraphicsDropShadowEffect>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -28,9 +27,15 @@ public slots:
 private:
     QGraphicsDropShadowEffect *shadow;
     QHBoxLayout *header_layout;
+    QHBoxLayout *con_layout;
+    QHBoxLayout *opear_layout;
+    QVBoxLayout *model_layout;
     QWidget *header_widget;
+    QWidget *opear_widget;
+    QWidget *con_widget;
     QLabel *header_title;
-    QSvgRenderer *renderer;
+    QLabel *tip;
+    QLabel *text;
     QPushButton *close_btn;
     QPushButton *on_btn;
     QPushButton *cancle_btn;
