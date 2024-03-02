@@ -34,7 +34,7 @@ Model::Model(QWidget *parent) : QWidget(parent) {
     close_btn->setObjectName("close_btn");
     close_btn->setCursor(Qt::PointingHandCursor);
     close_btn->installEventFilter(this);
-    connect(close_btn, SIGNAL(clicked()), this, SLOT(handleCloseBtn()));
+    connect(close_btn, SIGNAL(clicked()), this, SLOT(handleClose()));
 
     header_layout->addWidget(header_title, Qt::AlignLeft);
     header_layout->addStretch(5);
@@ -71,11 +71,13 @@ Model::Model(QWidget *parent) : QWidget(parent) {
     on_btn->setObjectName("on_btn");
     on_btn->setCursor(Qt::PointingHandCursor);
     on_btn->setFixedSize(80,30);
+    connect(on_btn, SIGNAL(clicked()),this, SLOT(handleOn()));
     cancle_btn = new QPushButton();
     cancle_btn->setText("取消");
     cancle_btn->setCursor(Qt::PointingHandCursor);
     cancle_btn->setFixedSize(80,30);
     cancle_btn->setObjectName("cancle_btn");
+    connect(cancle_btn, SIGNAL(clicked()),this, SLOT(handleClose()));
     opear_layout->addWidget(on_btn);
     opear_layout->addSpacing(10);
     opear_layout->addWidget(cancle_btn);
@@ -122,7 +124,9 @@ bool Model::eventFilter(QObject *obj, QEvent *event) {
     }
     return QWidget::eventFilter(obj, event);
 }
-
-void Model::handleCloseBtn() {
+void Model::handleOn(){
+   emit emitOn();
+}
+void Model::handleClose() {
     this->hide();
 }

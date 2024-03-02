@@ -37,6 +37,8 @@ public slots:
 
     void onTimeOut();
 
+    void handleOn();
+
 private:
     QLineEdit *lineEdit;
     QHBoxLayout *layout;

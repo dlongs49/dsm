@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include <iostream>
-#include <QDebug>
 #include <QDir>
 
 using namespace std;
@@ -64,7 +63,8 @@ MainWindow::MainWindow(QWidget *parent)
     toast = new Toast(this); // 轻提示
     model = new Model(); // 弹框
     model->setWindowModality(Qt::ApplicationModal);
-    model->show();
+    model->setAttribute(Qt::WA_DeleteOnClose);
+    connect(model, SIGNAL(emitOn()), this, SLOT(handleOn()));
 
     vlayout->setSpacing(0);
     vlayout->setMargin(0);
@@ -83,7 +83,6 @@ void MainWindow::customClick() {
 
     QDir qdir;
     QFileInfo fileInfo(str);
-
     if (str == "") {
         this->toast->showToast("请输入文件路径或目录路径");
         return;
@@ -92,16 +91,9 @@ void MainWindow::customClick() {
         this->toast->showToast("文件路径或文件不存在");
         return;
     }
-    this->progressBar->setVisible(true);
-    this->timer->start();
-    if (fileInfo.isFile()) {
-        QFile::remove(str);
-    } else if (fileInfo.isDir()) {
-        QDir qDir(str);
-        qDir.removeRecursively();
-    }
-};
+    this->model->show();
 
+};
 
 void MainWindow::onTimeOut() {
     static int time = 0;
@@ -114,6 +106,22 @@ void MainWindow::onTimeOut() {
         str = "";
         this->progressBar->setVisible(false);
     }
+}
+
+void MainWindow::handleOn() {
+    QDir qdir;
+    QFileInfo fileInfo(str);
+    this->progressBar->setVisible(true);
+    this->timer->start();
+    if (fileInfo.isFile()) {
+        QFile::remove(str);
+        this->model->hide();
+    } else if (fileInfo.isDir()) {
+        QDir qDir(str);
+        qDir.removeRecursively();
+        this->model->hide();
+    }
+
 }
 
 MainWindow::~MainWindow() {

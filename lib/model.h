@@ -21,9 +21,9 @@ public:
     void paintEvent(QPaintEvent *event);
 
     bool eventFilter(QObject *obj, QEvent *event);
-
 public slots:
-    void handleCloseBtn();
+    void handleClose();
+    void handleOn();
 private:
     QGraphicsDropShadowEffect *shadow;
     QHBoxLayout *header_layout;
@@ -43,7 +43,7 @@ private:
     QPainter *painter;
     QIcon *close_icon;
 signals:
-
+    void emitOn();
 };
 
 #endif // MODEL_H
