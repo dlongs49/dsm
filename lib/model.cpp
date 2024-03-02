@@ -85,7 +85,6 @@ Model::Model(QWidget *parent) : QWidget(parent) {
     opear_widget->setLayout(opear_layout);
     opear_widget->setFixedWidth(width);
     opear_widget->setFixedHeight(50);
-//    opear_widget->setStyleSheet("border:1px solid #ccc");
 
     model_layout = new QVBoxLayout();
     model_layout->setMargin(0);
