@@ -47,3 +47,7 @@ QWidget#msg_widget{
 QLabel#msg_label{
     color: #fff;
 }
+
+QWidget#header_widget{
+    border-bottom: 2px solid #eee;
+}

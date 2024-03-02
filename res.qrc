@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>resource/style.css</file>
         <file>resource/logo.ico</file>
+        <file>resource/close.svg</file>
     </qresource>
 </RCC>
