@@ -38,6 +38,7 @@ Thumbs.db
 /cmake-build-debug
 /build
 /debug
+/release
 /CMakeFiles
 # qtcreator generated files
 *.pro.user*
