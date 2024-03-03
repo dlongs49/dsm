@@ -72,3 +72,4 @@ install(TARGETS dsm
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(dsm)
 endif()
+# windeployqt.exe --no-opengl-sw --no-virtualkeyboard --no-system-d3d-compiler --no-angle  --no-translations --force  dsm.exe
