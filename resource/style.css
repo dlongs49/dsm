@@ -77,15 +77,14 @@ QPushButton#cancle_btn:hover{
 }
 QListWidget#list{
     background: #fff;
-    border:1px solid #d4c0fd;
-    /*margin-top: 40px;*/
-    border-radius: 12px;
-    padding: 6px;
+    border:2px solid #d4c0fd;
+    border-radius: 6px;
     outline: none;
+    padding: 1px;
 }
 
 QListWidget#list::Item{
-    background-color: #ffffff;
+    background: #fff;
     color: #000000;
     border: transparent;
     padding: 3px;
