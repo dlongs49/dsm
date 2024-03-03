@@ -15,7 +15,8 @@
 #include <QFileInfo>
 #include <QLabel>
 #include <QDir>
-
+#include <QListWidget>
+#include <QListWidgetItem>
 QT_BEGIN_NAMESPACE
 namespace Ui {
     class MainWindow;
@@ -44,10 +45,14 @@ private:
     QLineEdit *lineEdit;
     QHBoxLayout *layout;
     QHBoxLayout *layouts;
+    QHBoxLayout *list_layout;
     QVBoxLayout *vlayout;
     QWidget *inp_widget;
     QWidget *bar_widget;
     QWidget *main_widget;
+    QWidget *list_widget;
+    QListWidget *list;
+    QListWidgetItem *item;
     QPushButton *btn;
     QTimer *timer;
     QProgressBar *progressBar;

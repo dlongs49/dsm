@@ -53,7 +53,22 @@ MainWindow::MainWindow(QWidget *parent)
     timer->setInterval(10);
     connect(timer, SIGNAL(timeout()), this, SLOT(onTimeOut()));
 
+
+    list_widget = new QWidget(this);
+    list_widget->setFixedSize(w, 100);
+    list_layout = new QHBoxLayout();
+    list = new QListWidget(this);
+    list->setFixedSize(280, 60);
+    list->setObjectName("list");
+//    for (int i = 0; i < 10; i++) {
+//        item = new QListWidgetItem();
+//        item->setText("城市"+ QString::number(i));
+//        list->addItem(item);
+//    }
+    list_layout->addWidget(list);
+    list_widget->setLayout(list_layout);
     vlayout->addWidget(inp_widget);
+    vlayout->addWidget(list_widget);
     vlayout->addWidget(bar_widget);
     main_widget = new QWidget(this);
     main_widget->setFixedWidth(w);
@@ -67,7 +82,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     vlayout->setSpacing(0);
     vlayout->setMargin(0);
-    vlayout->setAlignment(Qt::AlignTop);
+    vlayout->setAlignment(Qt::AlignHCenter);
     main_widget->setLayout(vlayout);
     this->setCentralWidget(main_widget);
 }
@@ -89,6 +104,14 @@ void MainWindow::customClick() {
     if (!qdir.exists(str)) {
         this->toast->showToast("文件路径或文件不存在");
         return;
+    }
+    QDir dir(str);
+    QStringList files = dir.entryList();
+    for (int i = 0; i < files.count(); i++) {
+        qDebug() << files.at(i);
+        item = new QListWidgetItem();
+        item->setText(files.at(i));
+        this->list->addItem(item);
     }
     this->model->show();
 
