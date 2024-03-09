@@ -22,7 +22,7 @@ Q_OBJECT
 public:
     Model(QWidget *parent = nullptr);
 
-    void paintEvent(QPaintEvent *event);
+   // void paintEvent(QPaintEvent *event);
 
     bool eventFilter(QObject *obj, QEvent *event);
 public slots:
